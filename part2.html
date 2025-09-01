@@ -4,39 +4,73 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PART II – ÜBERLEBT</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Foglihten&family=Foglihten+No07&display=swap" rel="stylesheet">
+
 <style>
-  body { font-family: sans-serif; background: #111; color: #eee; padding: 20px; }
-  h1 { text-align: center; }
-  .track { margin-bottom: 8px; cursor: pointer; }
-  .track:hover { text-decoration: underline; }
-  audio { width: 100%; margin-top: 10px; }
+  body {
+    font-family: 'Foglihten', serif;
+    background: #111;
+    color: #eee;
+    padding: 20px;
+    text-align: center;
+  }
+  h1 {
+    font-family: 'Foglihten No07', serif;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+  #nowPlaying {
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  .track {
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+  .track:hover {
+    text-decoration: underline;
+  }
+  #playlist {
+    display: inline-block;
+    text-align: left;
+    margin-top: 20px;
+  }
+  audio {
+    width: 100%;
+    margin-top: 10px;
+  }
 </style>
 </head>
 <body>
+
 <h1>PART II – ÜBERLEBT</h1>
 <audio id="audio" controls controlsList="nodownload"></audio>
+<div id="nowPlaying"></div>
 <div id="playlist"></div>
 
 <script>
 const tracks = [
-["46 - SETHIAN...wahrscheinlich mein Meisterwerk","https://drive.google.com/uc?export=download&id=1A3QgQs9im6In87S64gfRG5dhraC_A71Z"],
-["47 - JASPER...springen","https://drive.google.com/uc?export=download&id=1IvioMTO3xw8OM0CeLKdwqfQh5LPYoVmq"],
-["48 - SETHIAN...in einer Traumwelt gequält","https://drive.google.com/uc?export=download&id=1wIRCI_fSHnxtLIjwAtik222UUwDBqWTs"],
-["49 - TOBI...ob wir einander dann sehen können","https://drive.google.com/uc?export=download&id=12sfm4TMIsuaHyr_LlSJqu-Nxw2K-KnNc"],
-["50 - SETHIAN...die Illusion zugelassen","https://drive.google.com/uc?export=download&id=1MiNco3jEDgl-1gA9QY5F6D4RssnAdPYs"],
-["51 - OKIMA...brauchen wir noch eine Magicae","https://drive.google.com/uc?export=download&id=1U6l1kahOGgFYcK3RBBsx1oypkkJuhHc_"],
-["52 - JASPER...wir waren auch schonmal ein besseres Team","https://drive.google.com/uc?export=download&id=1LHyKlqTFDZ6xJdvPg5uJDD1GWUJRL80a"],
-["53 - SETHIAN...endlich","https://drive.google.com/uc?export=download&id=1QRn6B28Lt1ILgFfB0Ey-_syfoFrsLloO"],
-["54 - OKIMA...etwas mehr Zeit","https://drive.google.com/uc?export=download&id=1kR04wFt0dnZK_cv3nxABcgmDAhsaj-TC"],
-["55 - SETHIAN...Gefühlsebene","https://drive.google.com/uc?export=download&id=1_DbxA2LpIowVnq69isl7nAE9dQYXfI4F"],
-["56 - TOBI...mein Blick huscht hinüber zum Friedhof","https://drive.google.com/uc?export=download&id=1WU4x-hg8O0tUOHnbkRH7SAAEcIwzgBoc"],
-["57 - ...er ist der Beste","https://drive.google.com/uc?export=download&id=1e6NlsGeFbl5XTm0xp_PH2Tp5b3aCBqOQ"],
-["58 - OKIMA...nicht länger eins","https://drive.google.com/uc?export=download&id=1dedNuIJ_CnRPeR07jwwuhkx5p-eA_tbN"],
-["59 - SUMMER...ich muss mehr wissen","https://drive.google.com/uc?export=download&id=1ZLYbe51xj5RrZ_EGLE0OALTlcCF9YJNf"],
-["60 - JASPER...Sunny","https://drive.google.com/uc?export=download&id=15bRcGUTq_mVg2FrIDVRuoaQCEx3vAuLk"],
-["61 - TOBI...bei Jasper sieht es immer so entspannt aus","https://drive.google.com/uc?export=download&id=1AidcEaKbVBihpFk9ykQy4y91TPqdnh4o"],
-["62 - SETHIAN...auch wenn das egoistischer ist als alles was ich je getan habe","https://drive.google.com/uc?export=download&id=1VEPa28ZZeoRsDfn3ezadRebhJJ3JYBgp"],
-["63 - SUMMER...so viele Farben","https://drive.google.com/uc?export=download&id=1b0zxzUX4mMBnNUgG5IQBDCKqfglp8c41"]
+["46 - SETHIAN...wahrscheinlich mein Meisterwerk","k46.mp3"],
+["47 - JASPER...springen","k47.mp3"],
+["48 - SETHIAN...in einer Traumwelt gequält","k48.mp3"],
+["49 - TOBI...ob wir einander dann sehen können","k49.mp3"],
+["50 - SETHIAN...die Illusion zugelassen","k50.mp3"],
+["51 - OKIMA...brauchen wir noch eine Magicae","k51.mp3"],
+["52 - JASPER...wir waren auch schonmal ein besseres Team","k52.mp3"],
+["53 - SETHIAN...endlich","k53.mp3"],
+["54 - OKIMA...etwas mehr Zeit","k54.mp3"],
+["55 - SETHIAN...Gefühlsebene","k55.mp3"],
+["56 - TOBI...mein Blick huscht hinüber zum Friedhof","k56.mp3"],
+["57 - ...er ist der Beste","k57.mp3"],
+["58 - OKIMA...nicht länger eins","k58.mp3"],
+["59 - SUMMER...ich muss mehr wissen","k59.mp3"],
+["60 - JASPER...Sunny","k60.mp3"],
+["61 - TOBI...bei Jasper sieht es immer so entspannt aus","k61.mp3"],
+["62 - SETHIAN...auch wenn das egoistischer ist als alles was ich je getan habe","k62.mp3"],
+["63 - SUMMER...so viele Farben","k63.mp3"]
 ];
 
 const audio = document.getElementById('audio');
@@ -57,6 +91,7 @@ function renderPlaylist() {
 function playTrack(index) {
   current = index;
   audio.src = tracks[index][1];
+  document.getElementById('nowPlaying').textContent = "▶ " + tracks[index][0];
   audio.play();
 }
 
