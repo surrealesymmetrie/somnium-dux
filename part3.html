@@ -4,29 +4,64 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PART III – LEBENDIG</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Foglihten&family=Foglihten+No07&display=swap" rel="stylesheet">
+
 <style>
-  body { font-family: sans-serif; background: #111; color: #eee; padding: 20px; }
-  h1 { text-align: center; }
-  .track { margin-bottom: 8px; cursor: pointer; }
-  .track:hover { text-decoration: underline; }
-  audio { width: 100%; margin-top: 10px; }
+  body {
+    font-family: 'Foglihten', serif;
+    background: #111;
+    color: #eee;
+    padding: 20px;
+    text-align: center;
+  }
+  h1 {
+    font-family: 'Foglihten No07', serif;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+  #nowPlaying {
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  .track {
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+  .track:hover {
+    text-decoration: underline;
+  }
+  #playlist {
+    display: inline-block;
+    text-align: left;
+    margin-top: 20px;
+  }
+  audio {
+    width: 100%;
+    margin-top: 10px;
+  }
 </style>
 </head>
 <body>
+
 <h1>PART III – LEBENDIG</h1>
 <audio id="audio" controls controlsList="nodownload"></audio>
+<div id="nowPlaying"></div>
 <div id="playlist"></div>
 
 <script>
 const tracks = [
-["64 - SETHIAN...nur ein Wispern","https://drive.google.com/uc?export=download&id=1haYQwgGGecpMJbWjGxovBPpEJv9E9pgd"],
-["65 - TOBI...echt","https://drive.google.com/uc?export=download&id=1AmFtiQhQn0F9RkCssboOjaYHgjCwaL2M"],
-["66 - JASPER...sie ist es","https://drive.google.com/uc?export=download&id=10I38BJx6ZYo9Eua6P7IBRke9Rl-rCImA"],
-["67 - SETHIAN...zwei Schritte voneinander entfernt","https://drive.google.com/uc?export=download&id=1eKuvAVJvBOylylaKzBOsZFg0txS68oHD"],
-["68 - SUMMER...wie das Einatmen nach dem Ausatmen","https://drive.google.com/uc?export=download&id=1biAs9aFGAxL0AC9drxX7udP5sBGdJsKy"],
-["69 - SETHIAN...an meiner Seite","https://drive.google.com/uc?export=download&id=1607V4iDXqlyPstNGDdkxDqzODwnwBErV"],
-["70 - SUMMER...Epilog","https://drive.google.com/uc?export=download&id=1CrYw_-phYEmyYAGu_WHm_6EL9IG2eH22"],
-["71 - DANKE!","https://drive.google.com/uc?export=download&id=1zfQemsIftpqkS-ADAdemtrt1uFq32poS"]
+["64 - SETHIAN...nur ein Wispern","k64.mp3"],
+["65 - TOBI...echt","k65.mp3"],
+["66 - JASPER...sie ist es","k66.mp3"],
+["67 - SETHIAN...zwei Schritte voneinander entfernt","k67.mp3"],
+["68a - SUMMER...wie das Einatmen nach dem Ausatmen","k68a.mp3"],
+["68b - SUMMER...wie das Einatmen nach dem Ausatmen","k68b.mp3"],
+["69 - SETHIAN...an meiner Seite","k69.mp3"],
+["70 - SUMMER...Epilog","k70.mp3"],
+["71 - DANKE!","k71.mp3"]
 ];
 
 const audio = document.getElementById('audio');
@@ -47,6 +82,7 @@ function renderPlaylist() {
 function playTrack(index) {
   current = index;
   audio.src = tracks[index][1];
+  document.getElementById('nowPlaying').textContent = "▶ " + tracks[index][0];
   audio.play();
 }
 
