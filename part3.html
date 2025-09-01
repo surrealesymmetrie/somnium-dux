@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PART III – LEBENDIG</title>
+<style>
+  body { font-family: sans-serif; background: #111; color: #eee; padding: 20px; }
+  h1 { text-align: center; }
+  .track { margin-bottom: 8px; cursor: pointer; }
+  .track:hover { text-decoration: underline; }
+  audio { width: 100%; margin-top: 10px; }
+</style>
+</head>
+<body>
+<h1>PART III – LEBENDIG</h1>
+<audio id="audio" controls controlsList="nodownload"></audio>
+<div id="playlist"></div>
+
+<script>
+const tracks = [
+["64 - SETHIAN...nur ein Wispern","https://drive.google.com/uc?export=download&id=1haYQwgGGecpMJbWjGxovBPpEJv9E9pgd"],
+["65 - TOBI...echt","https://drive.google.com/uc?export=download&id=1AmFtiQhQn0F9RkCssboOjaYHgjCwaL2M"],
+["66 - JASPER...sie ist es","https://drive.google.com/uc?export=download&id=10I38BJx6ZYo9Eua6P7IBRke9Rl-rCImA"],
+["67 - SETHIAN...zwei Schritte voneinander entfernt","https://drive.google.com/uc?export=download&id=1eKuvAVJvBOylylaKzBOsZFg0txS68oHD"],
+["68 - SUMMER...wie das Einatmen nach dem Ausatmen","https://drive.google.com/uc?export=download&id=1biAs9aFGAxL0AC9drxX7udP5sBGdJsKy"],
+["69 - SETHIAN...an meiner Seite","https://drive.google.com/uc?export=download&id=1607V4iDXqlyPstNGDdkxDqzODwnwBErV"],
+["70 - SUMMER...Epilog","https://drive.google.com/uc?export=download&id=1CrYw_-phYEmyYAGu_WHm_6EL9IG2eH22"],
+["71 - DANKE!","https://drive.google.com/uc?export=download&id=1zfQemsIftpqkS-ADAdemtrt1uFq32poS"]
+];
+
+const audio = document.getElementById('audio');
+const playlist = document.getElementById('playlist');
+let current = 0;
+
+function renderPlaylist() {
+  playlist.innerHTML = '';
+  tracks.forEach((track, index) => {
+    const div = document.createElement('div');
+    div.textContent = track[0];
+    div.className = 'track';
+    div.onclick = () => playTrack(index);
+    playlist.appendChild(div);
+  });
+}
+
+function playTrack(index) {
+  current = index;
+  audio.src = tracks[index][1];
+  audio.play();
+}
+
+audio.addEventListener('ended', () => {
+  if (current + 1 < tracks.length) {
+    playTrack(current + 1);
+  }
+});
+
+audio.addEventListener('timeupdate', () => {
+  localStorage.setItem('part3-track', current);
+  localStorage.setItem('part3-time', audio.currentTime);
+});
+
+window.addEventListener('load', () => {
+  renderPlaylist();
+  const savedTrack = localStorage.getItem('part3-track');
+  const savedTime = localStorage.getItem('part3-time');
+  if (savedTrack !== null) {
+    playTrack(parseInt(savedTrack));
+    if (savedTime) audio.currentTime = parseFloat(savedTime);
+  } else {
+    playTrack(0);
+  }
+});
+</script>
+</body>
+</html>

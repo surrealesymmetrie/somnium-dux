@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PART II – ÜBERLEBT</title>
+<style>
+  body { font-family: sans-serif; background: #111; color: #eee; padding: 20px; }
+  h1 { text-align: center; }
+  .track { margin-bottom: 8px; cursor: pointer; }
+  .track:hover { text-decoration: underline; }
+  audio { width: 100%; margin-top: 10px; }
+</style>
+</head>
+<body>
+<h1>PART II – ÜBERLEBT</h1>
+<audio id="audio" controls controlsList="nodownload"></audio>
+<div id="playlist"></div>
+
+<script>
+const tracks = [
+["46 - SETHIAN...wahrscheinlich mein Meisterwerk","https://drive.google.com/uc?export=download&id=1A3QgQs9im6In87S64gfRG5dhraC_A71Z"],
+["47 - JASPER...springen","https://drive.google.com/uc?export=download&id=1IvioMTO3xw8OM0CeLKdwqfQh5LPYoVmq"],
+["48 - SETHIAN...in einer Traumwelt gequält","https://drive.google.com/uc?export=download&id=1wIRCI_fSHnxtLIjwAtik222UUwDBqWTs"],
+["49 - TOBI...ob wir einander dann sehen können","https://drive.google.com/uc?export=download&id=12sfm4TMIsuaHyr_LlSJqu-Nxw2K-KnNc"],
+["50 - SETHIAN...die Illusion zugelassen","https://drive.google.com/uc?export=download&id=1MiNco3jEDgl-1gA9QY5F6D4RssnAdPYs"],
+["51 - OKIMA...brauchen wir noch eine Magicae","https://drive.google.com/uc?export=download&id=1U6l1kahOGgFYcK3RBBsx1oypkkJuhHc_"],
+["52 - JASPER...wir waren auch schonmal ein besseres Team","https://drive.google.com/uc?export=download&id=1LHyKlqTFDZ6xJdvPg5uJDD1GWUJRL80a"],
+["53 - SETHIAN...endlich","https://drive.google.com/uc?export=download&id=1QRn6B28Lt1ILgFfB0Ey-_syfoFrsLloO"],
+["54 - OKIMA...etwas mehr Zeit","https://drive.google.com/uc?export=download&id=1kR04wFt0dnZK_cv3nxABcgmDAhsaj-TC"],
+["55 - SETHIAN...Gefühlsebene","https://drive.google.com/uc?export=download&id=1_DbxA2LpIowVnq69isl7nAE9dQYXfI4F"],
+["56 - TOBI...mein Blick huscht hinüber zum Friedhof","https://drive.google.com/uc?export=download&id=1WU4x-hg8O0tUOHnbkRH7SAAEcIwzgBoc"],
+["57 - ...er ist der Beste","https://drive.google.com/uc?export=download&id=1e6NlsGeFbl5XTm0xp_PH2Tp5b3aCBqOQ"],
+["58 - OKIMA...nicht länger eins","https://drive.google.com/uc?export=download&id=1dedNuIJ_CnRPeR07jwwuhkx5p-eA_tbN"],
+["59 - SUMMER...ich muss mehr wissen","https://drive.google.com/uc?export=download&id=1ZLYbe51xj5RrZ_EGLE0OALTlcCF9YJNf"],
+["60 - JASPER...Sunny","https://drive.google.com/uc?export=download&id=15bRcGUTq_mVg2FrIDVRuoaQCEx3vAuLk"],
+["61 - TOBI...bei Jasper sieht es immer so entspannt aus","https://drive.google.com/uc?export=download&id=1AidcEaKbVBihpFk9ykQy4y91TPqdnh4o"],
+["62 - SETHIAN...auch wenn das egoistischer ist als alles was ich je getan habe","https://drive.google.com/uc?export=download&id=1VEPa28ZZeoRsDfn3ezadRebhJJ3JYBgp"],
+["63 - SUMMER...so viele Farben","https://drive.google.com/uc?export=download&id=1b0zxzUX4mMBnNUgG5IQBDCKqfglp8c41"]
+];
+
+const audio = document.getElementById('audio');
+const playlist = document.getElementById('playlist');
+let current = 0;
+
+function renderPlaylist() {
+  playlist.innerHTML = '';
+  tracks.forEach((track, index) => {
+    const div = document.createElement('div');
+    div.textContent = track[0];
+    div.className = 'track';
+    div.onclick = () => playTrack(index);
+    playlist.appendChild(div);
+  });
+}
+
+function playTrack(index) {
+  current = index;
+  audio.src = tracks[index][1];
+  audio.play();
+}
+
+audio.addEventListener('ended', () => {
+  if (current + 1 < tracks.length) {
+    playTrack(current + 1);
+  }
+});
+
+audio.addEventListener('timeupdate', () => {
+  localStorage.setItem('part2-track', current);
+  localStorage.setItem('part2-time', audio.currentTime);
+});
+
+window.addEventListener('load', () => {
+  renderPlaylist();
+  const savedTrack = localStorage.getItem('part2-track');
+  const savedTime = localStorage.getItem('part2-time');
+  if (savedTrack !== null) {
+    playTrack(parseInt(savedTrack));
+    if (savedTime) audio.currentTime = parseFloat(savedTime);
+  } else {
+    playTrack(0);
+  }
+});
+</script>
+</body>
+</html>

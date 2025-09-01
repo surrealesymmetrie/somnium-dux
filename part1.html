@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PART I – TOT</title>
+<style>
+  body { font-family: sans-serif; background: #111; color: #eee; padding: 20px; }
+  h1 { text-align: center; }
+  .track { margin-bottom: 8px; cursor: pointer; }
+  .track:hover { text-decoration: underline; }
+  audio { width: 100%; margin-top: 10px; }
+</style>
+</head>
+<body>
+<h1>PART I – TOT</h1>
+<audio id="audio" controls controlsList="nodownload"></audio>
+<div id="playlist"></div>
+
+<script>
+const tracks = [
+["1 - PROLOG...Fatuma & Mori","https://drive.google.com/uc?export=download&id=1LngMRkPpEdLtk1SXvyrWTdM8AfW9VibT"],
+["2 - SETHIAN...für immer","https://drive.google.com/uc?export=download&id=1xAoaCJEkLUCPANoShCqvWuSgFLszC8I4"],
+["3 - SUMMER...egal","https://drive.google.com/uc?export=download&id=10PLp9rRJX1TWFCL3QxsSxh6-VdDaol2X"],
+["4 - SETHIAN...neun von ungewiss","https://drive.google.com/uc?export=download&id=1CuoGY3OKjCy8VQZCeQaUE67n5jYvQrJs"],
+["5 - SUMMER - bleibe fassungslos zurück","https://drive.google.com/uc?export=download&id=1BRedKOzDuDD-PKH-xyRrmcw0AyeWsPQA"],
+["6 - SETHIAN...Karussell der Lebensenden","https://drive.google.com/uc?export=download&id=1vj3MkJ7tmCFR6s4eXrCx91WuuDJxqi8m"],
+["7 - SUMMER...wie soll ich mich nur erinnern","https://drive.google.com/uc?export=download&id=1ozA_5PsYM8ao-HWrS8ojMJia5Cgu2j1Y"],
+["8 - OKIMA...das Notfallgepäck","https://drive.google.com/uc?export=download&id=1ynP1xiWSOQfDhIhb53tWIov4t49y6iaG"],
+["9 - SETHIAN...verirrte Seele Nummer 1","https://drive.google.com/uc?export=download&id=12Wenpiw7shMcdn7HLUC-3ttAbz8yQpRC"],
+["10 - SUMMER...kein kleines verängstigtes Mädchen","https://drive.google.com/uc?export=download&id=1p5FRQKy-NgEuz6PrN8uP5_4hstLR_-cR"],
+["11 - OKIMA...also geh ich ohne Abschied","https://drive.google.com/uc?export=download&id=1bZwzmL0OVfFenEWfCT6ZIh23pvzg2ra6"],
+["12 - SETHIAN...allein","https://drive.google.com/uc?export=download&id=1iOFsVRFWxFh_wLmjkMVgDDumHttwilhJ"],
+["13 - SUMMER...Cinnamon","https://drive.google.com/uc?export=download&id=1j5qBAdloIbECK93sFriVEyD9UdFYU7VZ"],
+["14 - SETHIAN...Arbeit","https://drive.google.com/uc?export=download&id=1MgMtnUoEuKxKIq5Dbx2ZZUb0kO3jgxYJ"],
+["15 - OKIMA...keine Spaßbremse","https://drive.google.com/uc?export=download&id=157GVcPPB4jXxemSbRQ02I0qzXcv7SHUT"],
+["16 - SUMMER...Monsieur Unsterblich","https://drive.google.com/uc?export=download&id=1e7ADWFihtlxpFsoxs-TwrNZGZzkMgnQt"],
+["17 - SETHIAN...warten","https://drive.google.com/uc?export=download&id=1PFxPQfl-puGktajNbPI5-V8PFbhDXbeh"],
+["18 - SUMMER...warum nicht","https://drive.google.com/uc?export=download&id=11--0LtvvDc-ZlBSxknXhPXBriM5mS7AZ"],
+["19 - SETHIAN...Augenkontakt","https://drive.google.com/uc?export=download&id=1eKeMP5i3OMPm5F7ONgNJp7eZ0qzd3FMg"],
+["20 - SUMMER...gänzlich vorbei und erloschen","https://drive.google.com/uc?export=download&id=1nQFFrltCa4dsH2iX1enCvMaH-F6AzL4K"],
+["21 - OKIMA...verborgen","https://drive.google.com/uc?export=download&id=1p-BrUX4DVTAkdvJgHJ4-9afR91VKA4-V"],
+["22 - SUMMER...das Low nach dem High seiner Energie","https://drive.google.com/uc?export=download&id=1gW2wIVKUy2zYup1-67YacGwAgseUMBtU"],
+["23 - SETHIAN...nur eine Seele","https://drive.google.com/uc?export=download&id=1d-sD17rFXVx1zY3g8IoUIiSpJSQpv43m"],
+["24 - SUMMER...dieses Gold","https://drive.google.com/uc?export=download&id=12A6neYrCBK9U64fp-rT9bbh0ZjoLSBP7"],
+["25 - OKIMA...was er für richtig hält","https://drive.google.com/uc?export=download&id=1edECbwtYvZfA4M0Gzwx7RoMEKiqULdeJ"],
+["26 - SUMMER...er glaubt dass er muss","https://drive.google.com/uc?export=download&id=1SCH_ZEuRgEu_YulJWtxqYKkbOFYwZkcK"],
+["27 - SETHIAN...all diese Empfindungen","https://drive.google.com/uc?export=download&id=13CTWwMZxopYAMcdmN9Rd8oh-0Frf4vy1"],
+["28 - SUMMER...für einen klaren Gedanken","https://drive.google.com/uc?export=download&id=1eDIq8mJUr4cPY8PCdH2Qb4_dej6owTSH"],
+["29 - SETHIAN...das tosende Meer in meinen Armen","https://drive.google.com/uc?export=download&id=1-_YcSBiHxlqCslRuHytQMpDT90zJ07mz"],
+["30 - SUMMER...das Gold wird zu Silber","https://drive.google.com/uc?export=download&id=1meyg1V5sC7wXKXo7tzWvo8vCpzM49OHd"],
+["31 - SETHIAN...weniger Paradiese als Höllen","https://drive.google.com/uc?export=download&id=1vjSNLVBWoL41FzmDiMEWLYPfd76CRC4N"],
+["32 - SUMMER...wie war das mit der Hölle?","https://drive.google.com/uc?export=download&id=1r1VfqR_b6n5vS7x4-2jalnRaOcIv-MpO"],
+["33 - OKIMA...mitten im Büro","https://drive.google.com/uc?export=download&id=13nYSh51TGCc_ldS-fmP6OP60yD2h5_sG"],
+["34 - SETHIAN...grellweißes Licht","https://drive.google.com/uc?export=download&id=1y2OXiyePs2VWZ53pxfWSY87AIEieW4vI"],
+["35 - SUMMER...und alles wird schwarz","https://drive.google.com/uc?export=download&id=15XvLFDZXIVpOs8I26Eot7G0_5gZ6Tk73"],
+["36 - OKIMA...als Kala ihre Konzentration verliert","https://drive.google.com/uc?export=download&id=1xj9mGJMbnw2OY-Y0GYXJUPL-HBEhHnPh"],
+["37 - SETHIAN...aus dem Wald an den Abgrund","https://drive.google.com/uc?export=download&id=117PUTFsQdlBtbfMZ2CnATaYdtOkamjWK"],
+["38 - SUMMER...ich versinke in der Dunkelheit","https://drive.google.com/uc?export=download&id=1IJ0Q0kxS81F-bbsBtYZotsA5Akm02p_P"],
+["39 - OKIMA...wenn einer von uns nach Somnium reist","https://drive.google.com/uc?export=download&id=1Y4Tl-FWZGawD5RZTQKpUOtLNKCeX900f"],
+["40 - SETHIAN...das reicht mir fürs Erste","https://drive.google.com/uc?export=download&id=1yUL3ZTPA2rV87c6UHlyF0jibONJPKNKc"],
+["41 - SUMMER...wenn er nicht da ist","https://drive.google.com/uc?export=download&id=1YC8uj7DWUw5gs3_lt83QeAUMlF1sI-d7"],
+["42 - SETHIAN...alles wird schwarz","https://drive.google.com/uc?export=download&id=1gxyKWpXl06zsejiZWquwTnvj9qvgwP-m"],
+["43 - SUMMER...das bedeutet -","https://drive.google.com/uc?export=download&id=1LBbj4mkxjYhxnmfKkUvvPRGy68YDxC__"],
+["44 - SETHIAN...Fatuma","https://drive.google.com/uc?export=download&id=19snm5ZqiLNkQFuxAGNrq9Q4zGretKrvn"],
+["45 - OKIMA...das kann ich ihm nicht sagen","https://drive.google.com/uc?export=download&id=1cpD3NO2Tr-46XnQeDe0SSjkvdHE7AhbI"]
+];
