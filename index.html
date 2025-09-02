@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SOMNIUM I DUX</title>
+  <title>somnium dux</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Foglihten&family=Foglihten+No07&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Foglihten&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -32,7 +32,7 @@
       }
     }
 
-    /* Desktop Hintergrund (korrigierter Name!) */
+    /* Desktop Hintergrund */
     @media (min-width: 769px) {
       body {
         background-image: url('hoizontal.jpg');
@@ -40,13 +40,12 @@
     }
 
     h1 {
-      font-family: 'Foglihten No07', serif;
       font-size: 3em;
       margin-bottom: 0.2em;
+      text-transform: uppercase;
     }
 
     h2 {
-      font-family: 'Foglihten', serif;
       font-size: 1.5em;
       margin-bottom: 2em;
     }
@@ -73,25 +72,77 @@
     nav a:hover {
       background: rgba(255, 255, 255, 0.2);
     }
+
+    /* Zoom-In Effekt für PART I-III */
+    nav a.zoom-link {
+      transition: transform 0.3s ease;
+    }
+
+    nav a.zoom-link:active {
+      transform: scale(1.15);
+    }
+
+    /* Kreativ-Link mit Glow, Drehung & Glitzer */
+    nav a.creative-link {
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+      transition: all 0.3s ease;
+    }
+
+    nav a.creative-link:hover {
+      color: #fff;
+      background: rgba(128, 0, 128, 0.6);
+      box-shadow: 0 0 15px rgba(128, 0, 128, 0.8);
+    }
+
+    nav a.creative-link:active {
+      animation: spin 0.6s ease;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Glitzerpunkte */
+    nav a.creative-link::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.8) 2px, transparent 2px);
+      background-size: 20px 20px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    nav a.creative-link:active::after {
+      animation: sparkle 0.6s ease forwards;
+    }
+
+    @keyframes sparkle {
+      0% { opacity: 1; transform: scale(0.5) rotate(0deg); }
+      100% { opacity: 0; transform: scale(1.5) rotate(45deg); }
+    }
   </style>
 </head>
 <body>
 
-  <h1>SOMNIUM I DUX</h1>
+  <h1>somnium dux</h1>
   <h2>die verirrte Seele</h2>
 
-<nav>
-  <a href="part1.html">PART I</a>
-  <a href="part2.html">PART II</a>
-  <a href="part3.html">PART III</a>
+  <nav>
+    <a href="part1.html" class="zoom-link">PART I</a>
+    <a href="part2.html" class="zoom-link">PART II</a>
+    <a href="part3.html" class="zoom-link">PART III</a>
 
-  <div style="margin:10px 0; font-size:1.5em;">∞</div>
+    <div style="margin:10px 0; font-size:1.5em;">∞</div>
 
-  <a href="seite4.html">Platz für Kreativität</a>
-</nav>
+    <a href="seite4.html" class="creative-link">Platz für Kreativität</a>
+  </nav>
 
 </body>
 </html>
-
-
-
