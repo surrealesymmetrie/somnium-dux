@@ -129,25 +129,35 @@
 
     /* TRIGGERWARNUNGEN – kleiner, ohne Kasten */
     nav a.trigger-link {
+      all: unset;
       font-size: 0.9em;
-      text-decoration: none;
       color: #ccc;
+      cursor: pointer;
       margin-top: 5px;
       transition: color 0.3s ease;
+      text-align: center;
     }
 
     nav a.trigger-link:hover {
       color: #fff;
+      text-decoration: underline;
     }
 
     /* Herz-Animation */
-    @keyframes floatUp {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(-60px); opacity: 0; }
+    #heart {
+      font-size: 1.5em;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
     }
 
     #heart.fly {
       animation: floatUp 0.8s ease forwards;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-60px); opacity: 0; }
     }
   </style>
 </head>
@@ -164,7 +174,7 @@
     <div style="margin:10px 0; font-size:1.5em;">∞</div>
     <a href="seite4.html" class="creative-link">Platz für Kreativität</a>
 
-    <div id="heart" onclick="flyHeart()" style="font-size: 1.5em; cursor: pointer;">💜</div>
+    <div id="heart" onclick="flyHeart()">💜</div>
     <a href="seite5.html" class="trigger-link">TRIGGERWARNUNGEN</a>
   </nav>
 
