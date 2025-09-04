@@ -105,7 +105,6 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Glitzerpunkte */
     nav a.creative-link::after {
       content: "";
       position: absolute;
@@ -127,6 +126,29 @@
       0% { opacity: 1; transform: scale(0.5) rotate(0deg); }
       100% { opacity: 0; transform: scale(1.5) rotate(45deg); }
     }
+
+    /* TRIGGERWARNUNGEN – kleiner, ohne Kasten */
+    nav a.trigger-link {
+      font-size: 0.9em;
+      text-decoration: none;
+      color: #ccc;
+      margin-top: 5px;
+      transition: color 0.3s ease;
+    }
+
+    nav a.trigger-link:hover {
+      color: #fff;
+    }
+
+    /* Herz-Animation */
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-60px); opacity: 0; }
+    }
+
+    #heart.fly {
+      animation: floatUp 0.8s ease forwards;
+    }
   </style>
 </head>
 <body>
@@ -140,9 +162,21 @@
     <a href="part3.html" class="zoom-link">PART III</a>
 
     <div style="margin:10px 0; font-size:1.5em;">∞</div>
-
     <a href="seite4.html" class="creative-link">Platz für Kreativität</a>
+
+    <div id="heart" onclick="flyHeart()" style="font-size: 1.5em; cursor: pointer;">💜</div>
+    <a href="seite5.html" class="trigger-link">TRIGGERWARNUNGEN</a>
   </nav>
+
+  <script>
+    function flyHeart() {
+      const heart = document.getElementById('heart');
+      heart.classList.add('fly');
+      setTimeout(() => {
+        heart.classList.remove('fly');
+      }, 1000);
+    }
+  </script>
 
 </body>
 </html>
