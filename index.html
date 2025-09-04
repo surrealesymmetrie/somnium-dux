@@ -159,6 +159,16 @@
       0% { transform: translateY(0); opacity: 1; }
       100% { transform: translateY(-60px); opacity: 0; }
     }
+
+    /* Unendlichkeit drehen */
+    #infinity.spin {
+      animation: rotateInfinity 0.8s ease;
+    }
+
+    @keyframes rotateInfinity {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -167,15 +177,15 @@
   <h2>die verirrte Seele</h2>
 
   <nav>
-    <a href="part1.html" class="zoom-link">PART I</a>
-    <a href="part2.html" class="zoom-link">PART II</a>
-    <a href="part3.html" class="zoom-link">PART III</a>
+    <a href="part1.html" class="zoom-link" onclick="spinInfinity()">PART I</a>
+    <a href="part2.html" class="zoom-link" onclick="spinInfinity()">PART II</a>
+    <a href="part3.html" class="zoom-link" onclick="spinInfinity()">PART III</a>
 
-    <div style="margin:10px 0; font-size:1.5em;">∞</div>
-    <a href="seite4.html" class="creative-link">Platz für Kreativität</a>
+    <div id="infinity" style="margin:10px 0; font-size:1.5em;">∞</div>
+    <a href="seite4.html" class="creative-link" onclick="flyHeart()">Platz für Kreativität</a>
 
     <div id="heart" onclick="flyHeart()">💜</div>
-    <a href="seite5.html" class="trigger-link">TRIGGERWARNUNGEN</a>
+    <a href="seite5.html" class="trigger-link" onclick="flyHeart()">TRIGGERWARNUNGEN</a>
   </nav>
 
   <script>
@@ -184,6 +194,14 @@
       heart.classList.add('fly');
       setTimeout(() => {
         heart.classList.remove('fly');
+      }, 1000);
+    }
+
+    function spinInfinity() {
+      const infinity = document.getElementById('infinity');
+      infinity.classList.add('spin');
+      setTimeout(() => {
+        infinity.classList.remove('spin');
       }, 1000);
     }
   </script>
